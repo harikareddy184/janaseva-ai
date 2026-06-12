@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.git
+.gitlab-ci.yml
+Dockerfile
+docker-compose*.yml
+*.db
+database.bd
+database.db
+htmlcov
+.pytest_cache
+tests
+.vscode

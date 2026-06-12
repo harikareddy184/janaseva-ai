@@ -1,0 +1,74 @@
+image: python:3.10
+
+stages:
+  - lint
+  - format
+  - type_check
+  - test
+  - coverage
+  - security
+
+variables:
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+before_script:
+  - python -m pip install --upgrade pip
+  - pip install -r requirements.txt -r requirements-dev.txt
+  - pip install pylint flake8 vulture pyupgrade semgrep pip-audit
+
+lint:
+  stage: lint
+  script:
+    - ruff check .
+    - flake8 .
+    - pylint app.py
+
+format:
+  stage: format
+  script:
+    - black --check .
+    - ruff check .
+
+type_check:
+  stage: type_check
+  script:
+    - mypy --ignore-missing-imports app.py tests
+
+test:
+  stage: test
+  script:
+    - pytest --maxfail=1 --disable-warnings
+
+coverage:
+  stage: coverage
+  script:
+    - coverage run -m pytest
+    - coverage xml
+    - coverage report --fail-under=80
+  artifacts:
+    paths:
+      - coverage.xml
+      - htmlcov/
+    expire_in: 1 week
+
+semgrep:
+  stage: security
+  image: returntocorp/semgrep
+  script:
+    - semgrep --config=auto .
+
+dependency_audit:
+  stage: security
+  script:
+    - pip-audit
+
+vulture:
+  stage: lint
+  script:
+    - vulture .
+
+pyupgrade:
+  stage: lint
+  script:
+    - pyupgrade --py310-plus app.py

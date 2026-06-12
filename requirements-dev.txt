@@ -1,0 +1,7 @@
+pytest
+coverage
+ruff
+mypy
+bandit
+detect-secrets
+pre-commit

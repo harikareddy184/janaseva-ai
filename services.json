@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Aadhaar Card",
+    "keywords": ["aadhaar", "aadhar"],
+    "description": "Aadhaar is a 12-digit unique identity number.",
+    "documents": [
+      "Proof of Identity",
+      "Proof of Address"
+    ],
+    "steps": [
+      "Visit nearest Aadhaar center",
+      "Submit documents",
+      "Complete biometric verification"
+    ],
+    "link": "https://uidai.gov.in"
+  },
+  {
+    "title": "Ration Card",
+    "keywords": ["ration card", "ration"],
+    "description": "Ration card helps families access subsidized food.",
+    "documents": [
+      "Aadhaar Card",
+      "Address Proof"
+    ],
+    "steps": [
+      "Apply online",
+      "Upload documents",
+      "Submit application"
+    ],
+    "link": "https://nfsa.gov.in"
+  }
+]
